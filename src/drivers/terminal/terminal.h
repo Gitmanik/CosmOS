@@ -5,7 +5,7 @@
  * @Project: CosmOS
  * @Filename: terminal.h
  * @Last modified by:   Gitmanik
- * @Last modified time: 2019-03-03T12:56:56+01:00
+ * @Last modified time: 2019-03-03T13:40:13+01:00
  */
 
 #pragma once
@@ -17,11 +17,6 @@ void vga_clear();
 
 static const size_t VGA_WIDTH = 80;
 static const size_t VGA_HEIGHT = 25;
-
-void terminal_initialize(void);
-void terminal_setcolor(uint8_t color);
-void terminal_putchar(char c);
-void terminal_writestring(const char* data);
 
 enum vga_color {
 	BLACK = 0,
@@ -41,3 +36,9 @@ enum vga_color {
 	LIGHT_BROWN = 14,
 	WHITE = 15,
 };
+
+void terminal_initialize(void);
+void terminal_setcolor(enum vga_color fg, enum vga_color bg);
+void terminal_clear();
+void terminal_putchar(char c);
+void terminal_writestring(const char* data);

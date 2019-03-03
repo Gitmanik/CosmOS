@@ -4,7 +4,7 @@
 # @Project: CosmOS
 # @Filename: makefile
 # @Last modified by:   Gitmanik
-# @Last modified time: 2019-03-03T13:01:56+01:00
+# @Last modified time: 2019-03-03T13:49:31+01:00
 
 C_SOURCES = $(shell find . -name "*.c")
 C_HEADERS = $(shell find . -name "*.h")
@@ -18,7 +18,9 @@ ISO_NAME = CosmOS.iso
 all:${ISO_NAME}
 
 clean:
-	rm -rf **/*.o **/*.elf **/*.bin **/*.iso
+	find . -name \*.o -type f -delete
+	find . -name \*.bin -type f -delete
+	find . -name \*.iso -type f -delete
 
 run: ${ISO_NAME}
 	qemu-system-x86_64 -boot d -cdrom $< -m 32

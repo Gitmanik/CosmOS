@@ -5,7 +5,7 @@
  * @Project: CosmOS
  * @Filename: string.c
  * @Last modified by:   Gitmanik
- * @Last modified time: 2019-03-03T12:53:30+01:00
+ * @Last modified time: 2019-03-03T13:37:56+01:00
  */
 
 #include "string.h"
@@ -16,4 +16,19 @@
  	while (str[len])
  		len++;
  	return len;
+ }
+
+ void* memset(void* bufptr, int value, size_t size) {
+ 	unsigned char* buf = (unsigned char*) bufptr;
+ 	for (size_t i = 0; i < size; i++)
+ 		buf[i] = (unsigned char) value;
+ 	return bufptr;
+ }
+
+ void* memcpy(void* restrict dstptr, const void* restrict srcptr, size_t size) {
+ 	unsigned char* dst = (unsigned char*) dstptr;
+ 	const unsigned char* src = (const unsigned char*) srcptr;
+ 	for (size_t i = 0; i < size; i++)
+ 		dst[i] = src[i];
+ 	return dstptr;
  }
