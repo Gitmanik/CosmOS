@@ -1,11 +1,3 @@
-# @Author: Paweł Reich <Gitmanik>
-# @Date:   2019-03-03T12:09:14+01:00
-# @Email:  thegitman@outlook.com
-# @Project: CosmOS
-# @Filename: makefile
-# @Last modified by:   Gitmanik
-# @Last modified time: 2019-03-03T13:49:31+01:00
-
 C_SOURCES = $(shell find . -name "*.c")
 C_HEADERS = $(shell find . -name "*.h")
 C_OBJECTS = ${C_SOURCES:.c=.o}

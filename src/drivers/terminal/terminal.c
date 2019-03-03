@@ -1,18 +1,8 @@
-/**
- * @Author: Paweł Reich <Gitmanik>
- * @Date:   2019-03-03T13:12:10+01:00
- * @Email:  thegitman@outlook.com
- * @Project: CosmOS
- * @Filename: terminal.c
- * @Last modified by:   Gitmanik
- * @Last modified time: 2019-03-03T17:57:43+01:00
- */
-
 #include "terminal.h"
 #include <stdint.h>
 #include <stddef.h>
 #include "../../misc/string.h"
-#include "../../misc/inlineassembly.h"
+#include "../../misc/io.h"
 
 size_t terminal_row;
 size_t terminal_column;

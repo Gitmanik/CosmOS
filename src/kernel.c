@@ -1,13 +1,3 @@
-/**
- * @Author: Paweł Reich <Gitmanik>
- * @Date:   2019-03-03T13:14:46+01:00
- * @Email:  thegitman@outlook.com
- * @Project: CosmOS
- * @Filename: kernel.c
- * @Last modified by:   Gitmanik
- * @Last modified time: 2019-03-03T17:56:23+01:00
- */
-
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdint.h>
