@@ -5,7 +5,12 @@ C_OBJECTS = ${C_SOURCES:.c=.o}
 ASM_SOURCES = $(shell find . -name "*.asm")
 ASM_OBJECTS = ${ASM_SOURCES:.asm=.o}
 
+GCC = ~/opt/cross/bin/i686-elf-gcc
+LINKER = src/linker.ld
+
 ISO_NAME = CosmOS.iso
+
+default: run
 
 all:${ISO_NAME}
 
@@ -22,10 +27,10 @@ CosmOS.iso: isodir/boot/CosmOS.bin
 	grub-mkrescue -o ${ISO_NAME} isodir
 
 isodir/boot/CosmOS.bin: ${ASM_OBJECTS} ${C_OBJECTS}
-	i686-elf-gcc -T src/linker.ld -o isodir/boot/CosmOS.bin -ffreestanding -O2 -nostdlib $^
+	${GCC} -T ${LINKER} -o isodir/boot/CosmOS.bin -ffreestanding -O2 -nostdlib $^
 
 %.o: %.asm
 	nasm -felf32 "$<" -o "$@"
 
 %.o: %.c
-	i686-elf-gcc -ffreestanding -m32 -Wall -Wextra -c $< -o $@
+	${GCC} -ffreestanding -m32 -Wall -Wextra -c $< -o $@

@@ -22,5 +22,5 @@ void kernel_main(void)
 		terminal_putchar(0x41 + a);
 	}
 	terminal_setcolor(LIGHT_GREY, BLACK);
-	terminal_writestring("\nHello, kernel World!");
+	terminal_writestring("\nHello, kernel World!! :)");
 }
