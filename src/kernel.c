@@ -5,7 +5,7 @@
  * @Project: CosmOS
  * @Filename: kernel.c
  * @Last modified by:   Gitmanik
- * @Last modified time: 2019-03-03T13:47:46+01:00
+ * @Last modified time: 2019-03-03T17:56:23+01:00
  */
 
 #include <stdbool.h>
@@ -19,15 +19,18 @@
 #endif
 
 #if !defined(__i386__)
-#error "This tutorial needs to be compiled with a ix86-elf compiler"
+#error "CosmOS needs to be compiled with a ix86-elf compiler"
 #endif
 /*																												*/
 
 void kernel_main(void)
 {
-	/* Initialize terminal interface */
 	terminal_initialize();
-
-	/* Newline support is left as an exercise. */
-	terminal_writestring("Hello, kernel World!\nAAAA:)");
+	for (uint8_t a = 0; a < 26; a++)
+	{
+		terminal_setcolor(a % 16, BLACK);
+		terminal_putchar(0x41 + a);
+	}
+	terminal_setcolor(LIGHT_GREY, BLACK);
+	terminal_writestring("\nHello, kernel World!");
 }
