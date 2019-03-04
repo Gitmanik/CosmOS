@@ -80,3 +80,73 @@ char* itoa(int num, char* str, int base)
 	return str;
 
 }
+
+char* ltoa(long num, char* str, int base)
+{
+	long idx = 0;
+	bool negative = false;
+
+	if (num == 0)
+	{
+		str[idx++] = '0';
+		str[idx] = '\0';
+		return str;
+	}
+	if (num < 0 && base == 10)
+	{
+		negative = true;
+		num = -num;
+	}
+
+	while (num != 0)
+	{
+		long rem = num % base;
+		str[idx++] = (rem > 9) ? (rem-10) + 'a' : rem + '0';
+		num = num / base;
+	}
+
+	if (negative)
+		str[idx++] = '-';
+
+	str[idx] = '\0';
+
+	strrev(str);
+
+	return str;
+
+}
+
+char* ultoa(unsigned long num, char* str, int base)
+{
+	unsigned long idx = 0;
+	bool negative = false;
+
+	if (num == 0)
+	{
+		str[idx++] = '0';
+		str[idx] = '\0';
+		return str;
+	}
+	if (base == 10)
+	{
+		negative = true;
+		num = -num;
+	}
+
+	while (num != 0)
+	{
+		unsigned long rem = num % base;
+		str[idx++] = (rem > 9) ? (rem-10) + 'a' : rem + '0';
+		num = num / base;
+	}
+
+	if (negative)
+		str[idx++] = '-';
+
+	str[idx] = '\0';
+
+	strrev(str);
+
+	return str;
+
+}

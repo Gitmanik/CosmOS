@@ -32,5 +32,6 @@ void kernel_main(void)
 	char str[1000];
 	memset(str, 0, 1000);
 	terminal_putc('\n');terminal_puts(itoa(123, str, 10));
-	terminal_putc('\n');terminal_puts(itoa(0xdef, str, 16));
-}
+	terminal_putc('\n');terminal_puts(ultoa(0xdeadbeef, str, 16));
+	terminal_putc('\n');terminal_puts(itoa(0b1010, str, 2));
+	}
