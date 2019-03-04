@@ -25,8 +25,11 @@ enum vga_color {
 	VGA_COLOR_WHITE = 15,
 };
 
+void terminal_fill(enum vga_color fg, enum vga_color bg);
 void terminal_initialize(void);
 void terminal_setcolor(enum vga_color fg, enum vga_color bg);
+void terminal_setcursor(size_t new_column, size_t new_row);
+
 void terminal_clear(void);
 void terminal_putc(char c);
 void terminal_puts(const char* data);
