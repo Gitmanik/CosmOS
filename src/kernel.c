@@ -16,11 +16,15 @@
 void kernel_main(void)
 {
 	terminal_initialize();
-	for (uint8_t a = 0; a < 26; a++)
+	for (int b = 0; b < 2600; b++)
 	{
-		terminal_setcolor(a % 16, BLACK);
-		terminal_putchar(0x41 + a);
+		for (uint8_t a = 0; a < 26; a++)
+		{
+			terminal_setcolor(a % 16, BLACK);
+			terminal_putchar(0x41 + a);
+		}
 	}
+
 	terminal_setcolor(LIGHT_GREY, BLACK);
 	terminal_writestring("\nHello, kernel World!! :)");
 }

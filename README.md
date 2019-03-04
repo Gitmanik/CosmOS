@@ -19,7 +19,7 @@ make run
 ## TODO:
 - Load GDT/IDT
 - Handle IRQs
-- Everything else i don't remember
+- Everything else I don't remember
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
