@@ -1,7 +1,9 @@
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdint.h>
-#include "drivers/terminal/terminal.h"
+
+#include "terminal.h"
+#include "string.h"
 
 /* Check if proper compiler is used */
 #if defined(__linux__)
@@ -20,11 +22,15 @@ void kernel_main(void)
 	{
 		for (uint8_t a = 0; a < 26; a++)
 		{
-			terminal_setcolor(a % 16, BLACK);
-			terminal_putchar(0x41 + a);
+			terminal_setcolor(a % 16, VGA_COLOR_BLACK);
+			terminal_putc(0x41 + a);
 		}
 	}
 
-	terminal_setcolor(LIGHT_GREY, BLACK);
-	terminal_writestring("\nHello, kernel World!! :)");
+	terminal_setcolor(VGA_COLOR_LIGHT_GREY, VGA_COLOR_BLACK);
+	terminal_puts("\nHello, kernel World!! :)");
+	char str[1000];
+	memset(str, 0, 1000);
+	terminal_putc('\n');terminal_puts(itoa(123, str, 10));
+	terminal_putc('\n');terminal_puts(itoa(0xdef, str, 16));
 }

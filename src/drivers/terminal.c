@@ -1,8 +1,9 @@
-#include "terminal.h"
 #include <stdint.h>
 #include <stddef.h>
-#include "../../misc/string.h"
-#include "../../misc/io.h"
+
+#include "terminal.h"
+#include "string.h"
+#include "io.h"
 
 size_t terminal_row;
 size_t terminal_column;
@@ -19,6 +20,15 @@ void terminal_updatecursor(uint8_t x, uint8_t y)
 	outb(0x3D5, (uint8_t) ((pos >> 8) & 0xFF));
 }
 
+void terminal_scroll()
+{
+	for (size_t row = 0; row < VGA_HEIGHT; row++)
+	{
+		memcpy((void*) terminal_buffer + VGA_WIDTH * 2 * row, (void*) terminal_buffer + VGA_WIDTH * 2 * (row + 1), VGA_WIDTH * 2);
+	}
+	memset((void*) terminal_buffer  + VGA_HEIGHT * VGA_WIDTH * 2, 0, VGA_WIDTH * 2);
+}
+
 void terminal_setcolor(enum vga_color fg, enum vga_color bg)
 {
 	terminal_color =  fg | bg << 4;
@@ -31,10 +41,10 @@ static inline uint16_t vga_entry(unsigned char uc, uint8_t color)
 
 void terminal_clear(void)
 {
-	terminal_setcolor(LIGHT_GREY, BLACK);
+	terminal_setcolor(VGA_COLOR_LIGHT_GREY, VGA_COLOR_BLACK);
 
 	for (size_t i = 0; i < VGA_HEIGHT * VGA_WIDTH; i++)
-		terminal_putchar(' ');
+		terminal_putc(' ');
 
 	terminal_row = 0;
 	terminal_column = 0;
@@ -42,8 +52,8 @@ void terminal_clear(void)
 
 void terminal_initialize(void)
 {
-  terminal_clear();
-	terminal_setcolor(LIGHT_GREY, BLACK);
+	terminal_clear();
+	terminal_setcolor(VGA_COLOR_LIGHT_GREY, VGA_COLOR_BLACK);
 }
 
 void terminal_putentryat(char c, uint8_t color, size_t x, size_t y)
@@ -62,7 +72,7 @@ void terminal_newline(void)
 	}
 }
 
-void terminal_putchar(char c)
+void terminal_putc(char c)
 {
 	if (c == '\n')
 	{
@@ -78,22 +88,8 @@ void terminal_putchar(char c)
 	terminal_updatecursor(terminal_column,terminal_row);
 }
 
-void terminal_write(const char* data, size_t size)
+void terminal_puts(const char* data)
 {
-	for (size_t i = 0; i < size; i++)
-		terminal_putchar(data[i]);
-}
-
-void terminal_writestring(const char* data)
-{
-	terminal_write(data, strlen(data));
-}
-
-void terminal_scroll()
-{
-	for (int row = 0; row < VGA_HEIGHT; row++)
-	{
-		memcpy((void* ) terminal_buffer + VGA_WIDTH * 2 * row, (void* ) terminal_buffer + VGA_WIDTH * 2 * (row + 1), VGA_WIDTH * 2);
-	}
-	memset((void* ) terminal_buffer + VGA_HEIGHT * VGA_WIDTH * 2, 0, VGA_WIDTH * 2);
+	for (size_t i = 0; i < strlen(data); i++)
+		terminal_putc(data[i]);
 }

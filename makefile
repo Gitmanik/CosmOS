@@ -33,4 +33,4 @@ isodir/boot/CosmOS.bin: ${ASM_OBJECTS} ${C_OBJECTS}
 	nasm -felf32 "$<" -o "$@"
 
 %.o: %.c
-	${GCC} -ffreestanding -m32 -Wall -Wextra -c $< -o $@
+	${GCC} -ffreestanding -m32 -Wall -Wextra -Isrc/include -c $< -o $@
