@@ -1,3 +1,6 @@
+# New attempt (this time with *knowledge* what I am actually doing is located [here](https://github.com/Gitmanik/GitOS) 
+
+
 # CosmOS
 
 CosmOS is a (very simple) hobby OS.
